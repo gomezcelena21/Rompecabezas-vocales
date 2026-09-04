@@ -1,0 +1,219 @@
+:root{
+  --bg: #eef3ee;
+  --card: #ffffff;
+  --ink: #2c3a2f;
+  --muted: #6c7a6e;
+  --a: #3f9142;
+  --e: #2d6fae;
+  --i: #d98a1e;
+  --o: #d1483f;
+  --u: #7c4fae;
+  --radius: 22px;
+}
+
+*{
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body{
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  background: var(--bg);
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Verdana, sans-serif;
+  color: var(--ink);
+  min-height: 100vh;
+  padding: 18px 14px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+}
+
+h1{
+  font-size: clamp(22px, 5vw, 30px);
+  margin: 4px 0 2px;
+  text-align: center;
+  letter-spacing: 0.3px;
+}
+
+.subtitle{
+  color: var(--muted);
+  font-size: 15px;
+  margin-bottom: 18px;
+  text-align: center;
+  max-width: 480px;
+}
+
+/* ---------- Selector de vocales ---------- */
+nav.vocales{
+  display: flex;
+  gap: 10px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+nav.vocales button{
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: none;
+  font-size: 24px;
+  font-weight: 800;
+  cursor: pointer;
+  color: #fff;
+  box-shadow: 0 3px 0 rgba(0,0,0,0.12);
+  transition: transform .15s ease;
+}
+nav.vocales button:active{
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.12);
+}
+nav.vocales button.active{
+  outline: 3px solid #ffffffcc;
+  outline-offset: 2px;
+  transform: scale(1.08);
+}
+nav.vocales button[data-v="A"]{ background: var(--a); }
+nav.vocales button[data-v="E"]{ background: var(--e); }
+nav.vocales button[data-v="I"]{ background: var(--i); }
+nav.vocales button[data-v="O"]{ background: var(--o); }
+nav.vocales button[data-v="U"]{ background: var(--u); }
+
+/* ---------- Tarjeta principal ---------- */
+.stage{
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 22px;
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 8px 24px rgba(40,60,40,0.08);
+  border: 3px solid var(--accent, #ccc);
+}
+
+.puzzle-wrap{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* ---------- Tablero: 3x3, todas las piezas visibles y mezcladas ---------- */
+.board{
+  position: relative;
+  width: 300px;
+  height: 300px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 3px;
+  background: var(--accent-soft, #f0f0f0);
+  border-radius: 16px;
+  padding: 4px;
+}
+
+.cell{
+  position: relative;
+  border-radius: 6px;
+  background-size: 300px 300px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15) inset;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.cell::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid #ffffff;
+  border-radius: 6px;
+  pointer-events: none;
+}
+.cell.selected{
+  transform: scale(0.92);
+  box-shadow: 0 0 0 4px #ffffff, 0 0 0 7px var(--accent, #999);
+  z-index: 2;
+}
+.cell.locked{
+  cursor: default;
+}
+.cell.locked::after{
+  border-color: var(--accent, #999);
+}
+.cell.pop{
+  animation: pop-cell .3s ease;
+}
+@keyframes pop-cell{
+  0%   { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+.status{
+  text-align: center;
+  font-size: 15px;
+  color: var(--muted);
+  min-height: 20px;
+}
+
+/* ---------- Panel de resultado ---------- */
+.reveal{
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  animation: pop .35s ease;
+}
+@keyframes pop{
+  from{ transform: scale(.85); opacity: 0; }
+  to  { transform: scale(1); opacity: 1; }
+}
+.reveal .scene-full{
+  width: 220px;
+  height: 220px;
+  background-image: var(--scene-bg);
+  background-size: 220px 220px;
+  border-radius: 14px;
+}
+.word{
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+.word .vowel-letter{ color: var(--accent); }
+
+.hint{
+  font-size: 14px;
+  color: var(--muted);
+  text-align: center;
+  max-width: 340px;
+}
+
+.shuffle-btn{
+  margin-top: 6px;
+  background: var(--accent, #999);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 3px 0 rgba(0,0,0,0.12);
+}
+.shuffle-btn:active{
+  transform: translateY(2px);
+  box-shadow: none;
+}
+
+footer{
+  margin-top: 26px;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+  max-width: 480px;
+}

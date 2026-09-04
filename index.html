@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>Rompecabezas de Señas · Vocales</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <h1>Rompecabezas de Señas 🖐️</h1>
+  <p class="subtitle">TOCÁ DOS PIEZAS PARA INTERCAMBIARLAS Y ARMAR EL DIBUJO DE CADA VOCAL</p>
+
+  <nav class="vocales">
+    <button data-v="A" class="active">A</button>
+    <button data-v="E">E</button>
+    <button data-v="I">I</button>
+    <button data-v="O">O</button>
+    <button data-v="U">U</button>
+  </nav>
+
+  <div class="stage" id="stage">
+    <div class="puzzle-wrap">
+      <div class="board" id="board"></div>
+      <p class="status" id="status">TOCÁ UNA PIEZA Y DESPUÉS TOCÁ OTRA PARA CAMBIARLAS DE LUGAR.</p>
+
+      <div class="reveal" id="reveal">
+        <div class="scene-full" id="sceneFull"></div>
+        <div class="word" id="word"></div>
+        <p class="hint" id="hint"></p>
+        <button class="shuffle-btn" id="again">🔀 ARMAR DE NUEVO</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
